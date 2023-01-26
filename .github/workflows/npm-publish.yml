@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: mayurrawte/github-angular-actions@v1.1.0
+      - run: npm i -g @angular/cli > /dev/null
       - run: npm ci
       - run: ng build asa
 
@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - uses: mayurrawte/github-angular-actions@v1.1.0
+      - run: npm i -g @angular/cli > /dev/null
       - run: npm ci
       - run: ng build asa
       - run: cd dist/asa
