@@ -3,5 +3,38 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "asa": {
+      "projectType": "library",
+      "root": "projects/asa",
+      "sourceRoot": "projects/asa/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/asa/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/asa/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/asa/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/asa/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
   }
 }
