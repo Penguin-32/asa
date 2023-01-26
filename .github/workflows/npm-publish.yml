@@ -31,6 +31,6 @@ jobs:
       - run: npm i -g @angular/cli > /dev/null
       - run: npm ci
       - run: ng build asa
-      - run: cd dist/asa && npm publish
+      - run: cd dist/asa && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
