@@ -1,24 +1,103 @@
-# asa
+# ASA - Angular Scroll Animations
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+Versatile library to easily animate elements as user scrolls down the page.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project asa` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project asa`.
-> Note: Don't forget to add `--project asa` or else it will be added to the default project in your `angular.json` file. 
+- With NPM:
+```bash
+npm install @penguin32/asa --save
+```
 
-## Build
+in your Angular project.
 
-Run `ng build asa` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Usage
 
-## Publishing
+- Import the `AsaModule` into the module wherever you want to use it:
+```typescript
+import { AsaModule } from '@penguin32/asa';
 
-After building your library with `ng build asa`, go to the dist folder `cd dist/asa` and run `npm publish`.
+@NgModule({
+  imports: [
+    // ...
+    AsaModule
+  ]
+})
+export class AppModule { }
+```
 
-## Running unit tests
+### Using included animations
+This library comes with a handful of animations included. You can use them by passing the name of the animation
+as a string parameter to the `[scrollAnimation]` directive. The full list of available animations is available later in this document.
 
-Run `ng test asa` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Add the `[scrollAnimation]` directive to the element you want to animate:
+```html
+<div [scrollAnimation]="'fadeInLeft'">
+  <h1> When user scrolls to this currently invisible element </h1>
+  <p> it will fade in and make it's entry to the page! </p>
+</div>
+```
 
-## Further help
+### Using custom animations
+You can also create your own animations and use them with this library. To do so, you need to create field in your component
+that will hold the animation configuration as a `AnimationMetadata[]` object. You can then pass this field to the `[scrollAnimation]` directive.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Create a field in your component that will hold the animation configuration:
+```typescript
+import {animate, AnimationMetadata, keyframes, query, style} from "@angular/animations";
+
+const customAnimationExample: AnimationMetadata[] = [
+  query('*', [
+    animate('500ms ease-out',
+      keyframes([
+        style({opacity: 0, transform: 'translateX(-100%)', offset: 0}),
+        style({opacity: 1, transform: 'translateX(0)', offset: 1}),
+      ]),
+    ),
+  ])
+];
+```
+
+- Add the `[scrollAnimation]` directive to the element you want to animate:
+```html
+<div [scrollAnimation]="customAnimationExample">
+  <h1> Custom Animation example </h1>
+  <p> This is a very cool way to animate-in a element into the page! </p>
+</div>
+```
+
+### Bind animation progress to scroll position
+You can also bind the animation progress to the scroll position. This is a cool way to animate-in and out elements as user scrolls up and down the page.
+
+- Add the `[progressBoundToScroll]` input to the element you want to animate:
+```html
+<div [scrollAnimation]="'fadeInLeft'" [progressBoundToScroll]="true">
+  <h1> This element will animate-in and out as user scrolls up and down the page </h1>
+  <p> This is awesome! </p>
+</div>
+```
+
+If `[progressBoundToScroll]` is set to `false`, the animation will be triggered only once and will not be triggered again as user scrolls up and down the page,
+and the element will stay visible once animated.
+
+### Setting custom animation begin and finish points
+You can also set custom animation start and finish points.
+
+These parameters are used to determine when the animation should start and finish depending on the element position relative to the bottom of the page,
+so for example `[animationStart]="50"` would mean the animation will trigger when the element is `50px` from the bottom of the page.
+
+- Add the `[animationStart]` and `[animationEnd]` inputs to the element you want to animate:
+```html
+<div [scrollAnimation]="'fadeInLeft'" [animationStart]="50" [animationEnd]="100">
+  <h1> This element will animate-in when it's 50px from the bottom of the page </h1>
+  <p> and will finish animating when it's 100px from the bottom of the page </p>
+</div>
+```
+
+If the `[progressBouldToScroll]` is set to `true`, both `[animationStart]` and `[animationEnd]` will be used, as the animation is bound to the scroll position.
+On the other hand, if it's set to `false`, only `[animationStart]` will be used, as the animation will be triggered when the element is `animationStart` pixels
+from the bottom of the page.
+
+## Included animations
+
+- `fadeIn`
