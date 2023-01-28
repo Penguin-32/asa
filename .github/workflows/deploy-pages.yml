@@ -17,8 +17,9 @@ jobs:
         with:
           node-version: 16
       - run: npm i -g @angular/cli > /dev/null
-      - run: npm install
+      - run: npm ci
       - run: ng add angular-cli-ghpages --project asa-example --skip-confirmation
+      - run: ng build asa
       - name: Deploy to GH pages
         if: always()
         run: ng deploy --base-href=/asa/
