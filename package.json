@@ -6,10 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:asa": "ng build asa"
   },
   "dependencies": {
     "@angular/animations": "^15.0.0",
+    "@angular/cdk": "^15.1.2",
     "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
     "@angular/core": "^15.0.0",

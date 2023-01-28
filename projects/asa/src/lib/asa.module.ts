@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
-import { AsaComponent } from './asa.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ScrollAnimationDirective } from './directives/scroll-animation.directive';
 
 
 
 @NgModule({
   declarations: [
-    AsaComponent
+    ScrollAnimationDirective
   ],
   imports: [
+    BrowserAnimationsModule
   ],
   exports: [
-    AsaComponent
+    ScrollAnimationDirective,
   ]
 })
 export class AsaModule { }
