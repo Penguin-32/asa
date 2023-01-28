@@ -1,6 +1,12 @@
 {
   "name": "asa",
   "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Penguin-32/asa"
+  },
+  "homepage": "https://penguin-32.github.io/asa/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
