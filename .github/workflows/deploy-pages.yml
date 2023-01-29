@@ -16,12 +16,20 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm i -g @angular/cli > /dev/null
-      - run: npm ci
+      - name: Install Angular CLI
+        run: npm i -g @angular/cli > /dev/null
+
+      - name: Install NPM dependencies
+        run: npm ci
+
       - name: Install angular-cli-ghpages
         continue-on-error: true
         run: ng add angular-cli-ghpages --project asa-example --skip-confirmation
-      - run: ng build asa
-      - run: ng deploy --base-href=/asa/ --name="f4" --email=filip@penguin32.com
+
+      - name: Build ASA library
+        run: ng build asa
+
+      - name: Deploy to GitHub Pages
+        run: ng deploy --base-href=/asa/ --name="f4" --email=filip@penguin32.com
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
