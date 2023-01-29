@@ -22,4 +22,4 @@ jobs:
         continue-on-error: true
         run: ng add angular-cli-ghpages --project asa-example --skip-confirmation
       - run: ng build asa
-      - run: ng deploy --base-href=/asa/
+      - run: ng deploy --base-href=/asa/ --no-silent
