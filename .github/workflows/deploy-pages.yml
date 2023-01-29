@@ -22,11 +22,6 @@ jobs:
         continue-on-error: true
         run: ng add angular-cli-ghpages --project asa-example --skip-confirmation
       - run: ng build asa
-      - name: All things angular
-        uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
-        with:
-          github_access_token: ${{ secrets.ACCESS_TOKEN }}
-          build_configuration: production
-          base_href: /asa/
-          deploy_branch: gh-pages
-          angular_dist_build_folder: dist/asa-example
+      - run: ng deploy --base-href=/asa/ --name="f4" --email=filip@penguin32.com
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
