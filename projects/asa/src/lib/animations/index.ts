@@ -1,7 +1,8 @@
 import fadeInLeft from "./fadeInLeft";
-import {AnimationMetadata} from "@angular/animations";
+import AsaAnimation from "./asaAnimation";
+import FadeInLeft from "./fadeInLeft";
 
-const Animations: Map<string, AnimationMetadata[]> = new Map<string, AnimationMetadata[]>();
-Animations.set('fadeInLeft', fadeInLeft);
+const Animations: Map<string, AsaAnimation> = new Map<string, AsaAnimation>();
+Animations.set('fadeInLeft', new FadeInLeft());
 
 export default Animations;
