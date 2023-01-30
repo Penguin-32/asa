@@ -66,8 +66,8 @@ export class ScrollAnimationDirective {
     if (this.animationEnd < 0) {
       throw new Error('animationEnd must be greater than 0');
     }
-    if (this.progressBoundToScroll && this.animationStart < this.animationEnd) {
-      throw new Error('animationStart must be greater than animationEnd when progressBoundToScroll is true');
+    if (this.progressBoundToScroll && this.animationStart > this.animationEnd) {
+      throw new Error('animationEnd must be greater than animationStart when progressBoundToScroll is true');
     }
 
     // Prepare the animation, if the animation is string then it will be converted to an animation metadata array
