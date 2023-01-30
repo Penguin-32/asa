@@ -1,14 +1,13 @@
-import {animate, AnimationMetadata, keyframes, query, style} from "@angular/animations";
+import AsaAnimation from "./asaAnimation";
+import {AnimationKeyframesSequenceMetadata, keyframes, style} from "@angular/animations";
 
-const fadeInLeft: AnimationMetadata[] = [
-  query('*', [
-    animate('500ms ease-out',
-      keyframes([
-        style({opacity: 0, transform: 'translateX(-100%)', offset: 0}),
-        style({opacity: 1, transform: 'translateX(0)', offset: 1}),
-      ]),
-    ),
-  ])
-];
+class FadeInLeft extends AsaAnimation {
+  buildKeyframes(): AnimationKeyframesSequenceMetadata {
+    return keyframes([
+      style({opacity: 0, transform: 'translateX(-100%)', offset: 0}),
+      style({opacity: 1, transform: 'translateX(0)', offset: 1}),
+    ]);
+  }
+}
 
-export default fadeInLeft;
+export default FadeInLeft;
