@@ -29,7 +29,7 @@ abstract class AsaAnimation {
   public compileAnimation(): AnimationMetadata[] {
     if (this._stagger) {
       return [
-        query('*', [
+        query(':self', [
           stagger(this._stagger,
             animate(`${this._duration} ${this._curve}`,
               this.buildKeyframes()
@@ -39,7 +39,7 @@ abstract class AsaAnimation {
       ];
     }
     return [
-      query('*', [
+      query(':self', [
         animate(`${this._duration} ${this._curve}`,
           this.buildKeyframes()
         ),
