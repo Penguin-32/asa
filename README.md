@@ -80,24 +80,32 @@ You can also bind the animation progress to the scroll position. This is a cool 
 If `[progressBoundToScroll]` is set to `false`, the animation will be triggered only once and will not be triggered again as user scrolls up and down the page,
 and the element will stay visible once animated.
 
-### Setting custom animation begin and finish points
-You can also set custom animation start and finish points.
-
-These parameters are used to determine when the animation should start and finish depending on the element position relative to the bottom of the page,
-so for example `[animationStart]="50"` would mean the animation will trigger when the element is `50px` from the bottom of the page.
-
-- Add the `[animationStart]` and `[animationEnd]` inputs to the element you want to animate:
-```html
-<div [scrollAnimation]="'fadeInLeft'" [animationStart]="50" [animationEnd]="100">
-  <h1> This element will animate-in when it's 50px from the bottom of the page </h1>
-  <p> and will finish animating when it's 100px from the bottom of the page </p>
-</div>
-```
-
 If the `[progressBouldToScroll]` is set to `true`, both `[animationStart]` and `[animationEnd]` will be used, as the animation is bound to the scroll position.
 On the other hand, if it's set to `false`, only `[animationStart]` will be used, as the animation will be triggered when the element is `animationStart` pixels
 from the bottom of the page.
 
-## Included animations
+## Available settings
+| Directive               | Type                           | Required  | Default     | Description                                                                                                                                                                                            |
+|-------------------------|--------------------------------|-----------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [scrollAnimation]       | `string` `AnimationMetadata[]` | Yes       | `undefined` | Name of the included animation to use or custom Angular animation.                                                                                                                                     |
+| [progressBoundToScroll] | `boolean`                      | No        | `false`     | If set to `true`, the animation progress (0 - 100%) will be bound to the scroll position (`[animationStart]` - `[animationEnd]`), otherwise the animation will trigger only once on `[animationStart]` |
+| [animationStart]        | `number`                       | No        | `200`       | Distance from the bottom of the page when the animation should trigger.                                                                                                                                |
+| [animationEnd]          | `number`                       | No        | `220`       | Distance from the bottom of the page when the animation should end. Used only when `[progessBoundToScroll]` is `true`.                                                                                 |
+| [duration]              | `string`                       | No        | `'500ms'`   | Duration of the animation in CSS time.                                                                                                                                                                 |
+| [curve]                 | `string`                       | No        | `'ease-out'`| CSS curve of the animation to be used                                                                                                                                                                  |
 
+## Included animations
+### Fade
 - `fadeIn`
+- `fadeInLeft`
+- `fadeInRight`
+- `fadeInTop`
+- `fadeInBottom`
+### Flip
+- `flipLeft`
+- `flipRight`
+- `flipTop`
+- `flipBottom`
+### Zoom
+- `zoomIn`
+- `zoomOut`
