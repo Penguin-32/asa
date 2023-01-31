@@ -9,6 +9,11 @@ Versatile library to easily animate elements as user scrolls down the page.
 npm install @penguin32/asa --save
 ```
 
+- With Yarn:
+```bash
+yarn add @penguin32/asa
+```
+
 in your Angular project.
 
 ## Usage
@@ -85,14 +90,14 @@ On the other hand, if it's set to `false`, only `[animationStart]` will be used,
 from the bottom of the page.
 
 ## Available settings
-| Directive               | Type                           | Required  | Default     | Description                                                                                                                                                                                            |
-|-------------------------|--------------------------------|-----------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [scrollAnimation]       | `string` `AnimationMetadata[]` | Yes       | `undefined` | Name of the included animation to use or custom Angular animation.                                                                                                                                     |
-| [progressBoundToScroll] | `boolean`                      | No        | `false`     | If set to `true`, the animation progress (0 - 100%) will be bound to the scroll position (`[animationStart]` - `[animationEnd]`), otherwise the animation will trigger only once on `[animationStart]` |
-| [animationStart]        | `number`                       | No        | `200`       | Distance from the bottom of the page when the animation should trigger.                                                                                                                                |
-| [animationEnd]          | `number`                       | No        | `220`       | Distance from the bottom of the page when the animation should end. Used only when `[progessBoundToScroll]` is `true`.                                                                                 |
-| [duration]              | `string`                       | No        | `'500ms'`   | Duration of the animation in CSS time.                                                                                                                                                                 |
-| [curve]                 | `string`                       | No        | `'ease-out'`| CSS curve of the animation to be used                                                                                                                                                                  |
+| Directive               | Type                           | Required  | Default       | Description                                                                                                                                                                                            |
+|-------------------------|--------------------------------|-----------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [scrollAnimation]       | `string` `AnimationMetadata[]` | Yes       | `undefined`   | Name of the included animation to use or custom Angular animation.                                                                                                                                     |
+| [progressBoundToScroll] | `boolean`                      | No        | `false`       | If set to `true`, the animation progress (0 - 100%) will be bound to the scroll position (`[animationStart]` - `[animationEnd]`), otherwise the animation will trigger only once on `[animationStart]` |
+| [animationStart]        | `number`                       | No        | `200`         | Distance from the bottom of the page when the animation should trigger.                                                                                                                                |
+| [animationEnd]          | `number`                       | No        | `220`         | Distance from the bottom of the page when the animation should end. Used only when `[progessBoundToScroll]` is `true`.                                                                                 |
+| [duration]              | `string`                       | No        | `'500ms'`     | Duration of the animation in CSS time.                                                                                                                                                                 |
+| [curve]                 | `string`                       | No        | `'ease-out'`  | CSS curve of the animation to be used                                                                                                                                                                  |
 
 ## Included animations
 ### Fade
@@ -109,3 +114,7 @@ from the bottom of the page.
 ### Zoom
 - `zoomIn`
 - `zoomOut`
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Please check CONTRIBUTING.md for more details.
