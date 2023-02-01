@@ -1,13 +1,14 @@
 import AsaAnimation from "./asaAnimation";
 import {AnimationKeyframesSequenceMetadata, keyframes, style} from "@angular/animations";
 
-class FadeInLeft extends AsaAnimation {
+class FadeInTop extends AsaAnimation {
   buildKeyframes(): AnimationKeyframesSequenceMetadata {
     return keyframes([
-      style({opacity: 0, transform: 'translateX(-50%)', offset: 0}),
-      style({opacity: 1, transform: 'translateX(0)', offset: 1}),
+      style({opacity: 0, transform: 'translateY(-30%)', offset: 0}),
+      style({opacity: 1, transform: 'translateY(0)', offset: 1}),
     ]);
   }
 }
 
-export default FadeInLeft;
+export default FadeInTop;
+

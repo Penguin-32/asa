@@ -30,6 +30,21 @@ export class ScrollAnimationDirective {
   @Input() scrollAnimation: string | AnimationMetadata[] | undefined;
 
   /**
+   * The stagger of the animation. This should be a valid CSS duration. E.g. 500ms, 1s, 1000ms.
+   */
+  @Input() stagger: string | undefined;
+
+  /**
+   * The duration of the animation. This should be a valid CSS duration. E.g. 500ms, 1s, 1000ms.
+   */
+  @Input() duration: string | undefined;
+
+  /**
+   * The animation curve to be used. This should be a valid CSS animation curve. E.g. ease-in, ease-out, ease-in-out.
+   */
+  @Input() curve: string | undefined;
+
+  /**
    * Whether the animation has already played. This is used to prevent the animation from playing multiple times
    * when the user scrolls up and down the page when `progressBoundToScroll` is set to `false`.
    * @private
@@ -40,12 +55,6 @@ export class ScrollAnimationDirective {
    * @private
    */
   private animationPlayer: AnimationPlayer | undefined;
-  /**
-   * The scroll offset relative to the element from the bottom of the screen. This is used to determine when the
-   * animation should start.
-   * @private
-   */
-  private scrollOffset: number = 0;
 
   constructor(
     private animationBuilder: AnimationBuilder,
@@ -54,7 +63,6 @@ export class ScrollAnimationDirective {
 
   ngOnInit() {
     // This directive only functions with the scrollAnimation input
-    console.log(this.scrollAnimation);
     if (!this.scrollAnimation) {
       throw new Error('scrollAnimation directive requires an animation to be passed in');
     }
@@ -66,17 +74,24 @@ export class ScrollAnimationDirective {
     if (this.animationEnd < 0) {
       throw new Error('animationEnd must be greater than 0');
     }
-    if (this.progressBoundToScroll && this.animationStart < this.animationEnd) {
-      throw new Error('animationStart must be greater than animationEnd when progressBoundToScroll is true');
+    if (this.progressBoundToScroll && this.animationStart > this.animationEnd) {
+      throw new Error('animationEnd must be greater than animationStart when progressBoundToScroll is true');
     }
 
     // Prepare the animation, if the animation is string then it will be converted to an animation metadata array
     if (typeof this.scrollAnimation === 'string') {
-      this.scrollAnimation = Animations.get(this.scrollAnimation);
+      const asaAnimation = Animations.get(this.scrollAnimation);
 
-      if (!this.scrollAnimation) {
+      if (!asaAnimation) {
         throw new Error("Animation with key '" + this.scrollAnimation + "' not found");
       }
+
+      // Set the animation metadata
+      if (this.stagger) asaAnimation.stagger = this.stagger;
+      if (this.duration) asaAnimation.duration = this.duration;
+      if (this.curve) asaAnimation.curve = this.curve;
+
+      this.scrollAnimation = asaAnimation.compileAnimation();
     }
   }
 
@@ -103,13 +118,11 @@ export class ScrollAnimationDirective {
   private isScrolledIntoView(){
     if (this.el){
       const rect = this.el.nativeElement.getBoundingClientRect();
-      this.scrollOffset = rect.top;
       this.animateFromScroll(window.innerHeight - rect.bottom);
     }
   }
 
   private buildAnimationPlayer(animation: AnimationMetadata | AnimationMetadata[]) {
-    console.log('build')
     const animationFactory = this.animationBuilder.build(animation)
     const animationPlayer = animationFactory.create(this.el.nativeElement);
     animationPlayer.play();
