@@ -1,6 +1,7 @@
-import {Directive, ElementRef, HostListener, Input} from '@angular/core';
+import {Directive, ElementRef, HostListener, Inject, Input, PLATFORM_ID} from '@angular/core';
 import {AnimationBuilder, AnimationMetadata, AnimationPlayer} from "@angular/animations";
 import Animations from "../animations";
+import {isPlatformServer} from "@angular/common";
 
 @Directive({
   selector: '[scrollAnimation]'
@@ -58,10 +59,16 @@ export class ScrollAnimationDirective {
 
   constructor(
     private animationBuilder: AnimationBuilder,
-    private el: ElementRef
+    private el: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
+    // Check if element is rendered on server
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
     // This directive only functions with the scrollAnimation input
     if (!this.scrollAnimation) {
       throw new Error('scrollAnimation directive requires an animation to be passed in');
@@ -96,6 +103,11 @@ export class ScrollAnimationDirective {
   }
 
   ngAfterViewInit() {
+    // Check if element is rendered on server
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
     if (!this.animationPlayer) {
       this.animationPlayer = this.buildAnimationPlayer(this.scrollAnimation as AnimationMetadata[]);
     }
@@ -116,6 +128,11 @@ export class ScrollAnimationDirective {
 
   @HostListener('window:scroll', ['$event'])
   private isScrolledIntoView(){
+    // Check if element is rendered on server
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
     if (this.el){
       const rect = this.el.nativeElement.getBoundingClientRect();
       this.animateFromScroll(window.innerHeight - rect.bottom);
