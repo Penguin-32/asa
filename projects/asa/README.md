@@ -18,17 +18,21 @@ in your Angular project.
 
 ## Usage
 
-- Import the `AsaModule` into the module wherever you want to use it:
+- Import the `AsaModule` and `BrowserAnimationsModule`/`NoopAnimationsModule` into the module wherever you want to use it:
+
 ```typescript
-import { AsaModule } from '@penguin32/asa';
+import {AsaModule} from '@penguin32/asa';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
     // ...
-    AsaModule
+    AsaModule,
+    BrowserAnimationsModule,
   ]
 })
-export class AppModule { }
+export class AppModule {
+}
 ```
 
 ### Using included animations
