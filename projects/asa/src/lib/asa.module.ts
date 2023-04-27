@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ScrollAnimationDirective } from './directives/scroll-animation.directive';
 
 
@@ -7,9 +6,6 @@ import { ScrollAnimationDirective } from './directives/scroll-animation.directiv
 @NgModule({
   declarations: [
     ScrollAnimationDirective
-  ],
-  imports: [
-    BrowserAnimationsModule
   ],
   exports: [
     ScrollAnimationDirective,
