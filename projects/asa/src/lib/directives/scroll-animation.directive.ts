@@ -75,12 +75,12 @@ export class ScrollAnimationDirective {
     }
 
     // Check if the animationStart and animationEnd inputs are valid
-    if (this.animationStart < 0) {
-      throw new Error('animationStart must be greater than 0');
-    }
-    if (this.animationEnd < 0) {
-      throw new Error('animationEnd must be greater than 0');
-    }
+    // if (this.animationStart < 0) {
+    //   throw new Error('animationStart must be greater than 0');
+    // }
+    // if (this.animationEnd < 0) {
+    //   throw new Error('animationEnd must be greater than 0');
+    // }
     if (this.progressBoundToScroll && this.animationStart > this.animationEnd) {
       throw new Error('animationEnd must be greater than animationStart when progressBoundToScroll is true');
     }
